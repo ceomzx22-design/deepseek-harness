@@ -1,0 +1,16 @@
+services:
+  deeptutor:
+    image: ghcr.io/hkuds/deeptutor:latest
+    container_name: deeptutor
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${DEEPTUTOR_PORT:-3782}:3782"
+    volumes:
+      - deeptutor-data:/app/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+
+volumes:
+  deeptutor-data:
